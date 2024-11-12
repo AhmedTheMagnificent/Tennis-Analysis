@@ -1,10 +1,5 @@
 from ultralytics import YOLO
 
-model = YOLO("yolov8x")
+model = YOLO("yolov8x.pt")
 
-result = model.predict(r"A:\ProgrmmingStuff\Tennis-Analysis\input_videos\input_video.mp4", save=True)
-
-print(result)
-print("Boxes: ")
-for box in result[0].boxes:
-    print(box)
+result = model.track(r"A:\ProgrmmingStuff\Tennis-Analysis\input_videos\input_video.mp4", conf=0.2, save=True)
