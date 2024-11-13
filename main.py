@@ -2,15 +2,16 @@ from utils import (
     read_video,
     save_video
 )
-from trackers import PlayerTracker
+from trackers import PlayerTracker, BallTracker
 
 
 def main():
     input_path = r"A:\ProgrmmingStuff\Tennis-Analysis\input_videos\input_video.mp4"
     video_frames = read_video(input_path)
     
-    player_tracker = PlayerTracker(model_path=r"Tennis-Analysis\yolov8x.pt")
-    player_detections = player_tracker.detect_frames(video_frames)
+    player_tracker = PlayerTracker(model_path=r"A:\ProgrmmingStuff\Tennis-Analysis\yolov8x.pt")
+    ball_tracker = BallTracker(model_path=r"A:\ProgrmmingStuff\Tennis-Analysis\models\last.pt")
+    player_detections = player_tracker.detect_frames(video_frames, read_from_studs=False, stub_path=r"A:\ProgrmmingStuff\Tennis-Analysis\tracker_stubs\player_detections.pkl")
     
     output_frames = player_tracker.draw_bounding_boxes(video_frames, player_detections)
     
