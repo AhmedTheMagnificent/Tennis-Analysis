@@ -2,6 +2,7 @@ import torch
 import torchvision.models as models
 import torchvision.transforms as transforms
 import cv2 as cv
+import numpy
 
 class CourtLineDetector:
     def __init__(self, model_path):
@@ -17,9 +18,9 @@ class CourtLineDetector:
         
     def predict(self, image):
         image = cv.cvtColor(image, cv.COLOR_BGR2RGB)
-        image = self.transforms(image).unsqueeze(0)
+        image_tensor = self.transforms(image).unsqueeze(0)
         with torch.no_grad():
-            outputs = self.model(image)
+            outputs = self.model(image_tensor)
         keypoints = outputs.squeeze().cpu().numpy()
         original_height, original_width = image.shape[:2]
         keypoints[::2] *= original_width / 224.0
