@@ -6,10 +6,10 @@ class PlayerTracker:
     def __init__(self, model_path):
         self.model = YOLO(model_path)
         
-    def detect_frames(self, frames, read_from_studs=False, stub_path=None):
+    def detect_frames(self, frames, read_from_stubs=False, stub_path=None):
         player_detections = []
         
-        if read_from_studs and stub_path is not None:
+        if read_from_stubs and stub_path is not None:
             with open(stub_path, 'rb') as file:
                 player_detections = pickle.load(file)
                 return player_detections
