@@ -12,7 +12,7 @@ def main():
     player_tracker = PlayerTracker(model_path=r"A:\ProgrmmingStuff\Tennis-Analysis\yolov8x.pt")
     ball_tracker = BallTracker(model_path=r"A:\ProgrmmingStuff\Tennis-Analysis\models\last.pt")
     player_detections = player_tracker.detect_frames(video_frames, read_from_stubs=True, stub_path=r"A:\ProgrmmingStuff\Tennis-Analysis\tracker_stubs\player_detections.pkl")
-    ball_detections = ball_tracker.detect_frames(video_frames, read_from_stubs=False, stub_path=r"A:\ProgrmmingStuff\Tennis-Analysis\tracker_stubs\ball_detections.pkl")
+    ball_detections = ball_tracker.detect_frames(video_frames, read_from_stubs=True, stub_path=r"A:\ProgrmmingStuff\Tennis-Analysis\tracker_stubs\ball_detections.pkl")
     
     output_frames = player_tracker.draw_bounding_boxes(video_frames, player_detections)
     output_frames = ball_tracker.draw_bounding_boxes(video_frames, ball_detections)

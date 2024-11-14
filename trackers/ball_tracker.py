@@ -39,7 +39,7 @@ class BallTracker:
         for frame, detections in zip(frames, ball_detections):
             for track_id, box in detections.items():
                 x1, y1, x2, y2 = map(int, box)
-                cv.putText(frame, f"Ball ID: {track_id}", (x1 - 10, y1 - 10), cv.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
-                cv.rectangle(frame, (x1, y1), (x2, y2), (0, 0, 255), 2)
+                cv.putText(frame, f"Ball ID: {track_id}", (x1 - 10, y1 - 10), cv.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 255), 2)
+                cv.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 255), 2)
             output_frames.append(frame)
         return output_frames
