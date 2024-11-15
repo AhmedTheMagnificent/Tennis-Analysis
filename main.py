@@ -15,16 +15,23 @@ def main():
     
     player_detections = player_tracker.detect_frames(video_frames, read_from_stubs=True, stub_path=r"A:\ProgrmmingStuff\Tennis-Analysis\tracker_stubs\player_detections.pkl")
     ball_detections = ball_tracker.detect_frames(video_frames, read_from_stubs=True, stub_path=r"A:\ProgrmmingStuff\Tennis-Analysis\tracker_stubs\ball_detections.pkl")
+    ball_detections = ball_tracker.interpolate_ball_positions(ball_detections)
+    
     
     court_model_path = r"A:\ProgrmmingStuff\Tennis-Analysis\models\keypoints_model.pth"
     court_line_detector = CourtLineDetector(court_model_path)
     court_keypoints = court_line_detector.predict(video_frames[0])
     
+    player_detections = player_tracker.choose_and_filter_players(court_keypoints, player_detections)
+    
     output_frames = player_tracker.draw_bounding_boxes(video_frames, player_detections)
     output_frames = ball_tracker.draw_bounding_boxes(output_frames, ball_detections)
     
-    print(court_keypoints)
     output_frames = court_line_detector.draw_keypoints_on_video(output_frames, court_keypoints)
+    
+    # draw frame number on top left corner
+    for i, frame in enumerate(output_frames):
+        cv.putText(frame, f"{i}th frame", (10, 30), cv.FONT_HERSHEY_COMPLEX, 1, (255, 0, 255), 2)
     
     save_video(output_frames, r"A:\ProgrmmingStuff\Tennis-Analysis\output_videos\output_video.avi")
     
