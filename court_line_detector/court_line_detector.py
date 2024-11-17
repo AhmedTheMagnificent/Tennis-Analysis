@@ -32,7 +32,7 @@ class CourtLineDetector:
         for i in range(0, len(keypoints), 2):
             x, y = int(keypoints[i]), int(keypoints[i + 1])
             print(f"Drawing keypoint {i // 2} at ({x}, {y})")  # Debug print
-            cv.putText(image, str(i // 2), (x, y - 10), cv.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
+            cv.putText(image, str(i // 2), (x, y - 10), cv.FONT_HERSHEY_SIMPLEX, 0.5, (0, 100, 255), 2)
             cv.circle(image, (x, y), 5, (0, 100, 255), -1)
         return image
 

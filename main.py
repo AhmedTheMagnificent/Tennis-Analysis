@@ -5,6 +5,7 @@ from utils import (
 from trackers import PlayerTracker, BallTracker
 from court_line_detector import CourtLineDetector
 import cv2 as cv
+from mini_court import MiniCourt
 
 def main():
     input_path = r"A:\ProgrmmingStuff\Tennis-Analysis\input_videos\input_video.mp4"
@@ -24,10 +25,14 @@ def main():
     
     player_detections = player_tracker.choose_and_filter_players(court_keypoints, player_detections)
     
+    mini_court = MiniCourt(video_frames[0])
+    
     output_frames = player_tracker.draw_bounding_boxes(video_frames, player_detections)
     output_frames = ball_tracker.draw_bounding_boxes(output_frames, ball_detections)
     
     output_frames = court_line_detector.draw_keypoints_on_video(output_frames, court_keypoints)
+    
+    output_frames = mini_court.draw_mini_court(output_frames)
     
     # draw frame number on top left corner
     for i, frame in enumerate(output_frames):
