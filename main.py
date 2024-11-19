@@ -30,6 +30,8 @@ def main():
     ball_shot_frames = ball_tracker.get_ball_shot_frames(ball_detections)
     print(ball_shot_frames)
     
+    player_mini_court_detections, ball_mini_court_detections = mini_court.convert_bounding_boxes_to_mini_court_coordinates(player_detections, ball_detections, court_keypoints)
+    
     output_frames = player_tracker.draw_bounding_boxes(video_frames, player_detections)
     output_frames = ball_tracker.draw_bounding_boxes(output_frames, ball_detections)
     
