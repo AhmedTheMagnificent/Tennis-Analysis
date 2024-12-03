@@ -38,6 +38,8 @@ def main():
     output_frames = court_line_detector.draw_keypoints_on_video(output_frames, court_keypoints)
     
     output_frames = mini_court.draw_mini_court(output_frames)
+    output_frames = mini_court.draw_points_on_mini_court(output_frames, player_mini_court_detections)
+    output_frames = mini_court.draw_points_on_mini_court(output_frames, ball_mini_court_detections, (255, 0, 0))
     
     # draw frame number on top left corner
     for i, frame in enumerate(output_frames):
